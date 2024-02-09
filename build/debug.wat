@@ -44,7 +44,7 @@
  (data $10 (i32.const 524) ",\00\00\00\00\00\00\00\00\00\00\00\02\00\00\00\1c\00\00\00I\00n\00v\00a\00l\00i\00d\00 \00l\00e\00n\00g\00t\00h\00")
  (data $11 (i32.const 572) "<\00\00\00\00\00\00\00\00\00\00\00\02\00\00\00*\00\00\00O\00b\00j\00e\00c\00t\00 \00a\00l\00r\00e\00a\00d\00y\00 \00p\00i\00n\00n\00e\00d\00\00\00")
  (data $12 (i32.const 636) "<\00\00\00\00\00\00\00\00\00\00\00\02\00\00\00(\00\00\00O\00b\00j\00e\00c\00t\00 \00i\00s\00 \00n\00o\00t\00 \00p\00i\00n\00n\00e\00d\00\00\00\00\00")
- (data $13 (i32.const 704) "\07\00\00\00 \00\00\00 \00\00\00 \00\00\00\00\00\00\00A\00\00\00B\08\00\00\02\t\00\00")
+ (data $13 (i32.const 704) "\07\00\00\00 \00\00\00 \00\00\00 \00\00\00\00\00\00\00A\00\00\00B\00\00\00\02\t\00\00")
  (table $0 1 1 funcref)
  (elem $0 (i32.const 1))
  (export "__new" (func $~lib/rt/itcms/__new))
@@ -2348,7 +2348,7 @@
    end
   end
  )
- (func $~lib/array/Array<i8>#get:length_ (param $this i32) (result i32)
+ (func $~lib/array/Array<u8>#get:length_ (param $this i32) (result i32)
   local.get $this
   i32.load offset=12
  )
@@ -2406,12 +2406,12 @@
   local.get $newPtr
   return
  )
- (func $~lib/array/Array<i8>#set:length_ (param $this i32) (param $length_ i32)
+ (func $~lib/array/Array<u8>#set:length_ (param $this i32) (param $length_ i32)
   local.get $this
   local.get $length_
   i32.store offset=12
  )
- (func $~lib/array/Array<i8>#get:dataStart (param $this i32) (result i32)
+ (func $~lib/array/Array<u8>#get:dataStart (param $this i32) (result i32)
   local.get $this
   i32.load offset=4
  )
@@ -2568,17 +2568,17 @@
   local.get $1
   call $~lib/arraybuffer/ArrayBufferView~visit
  )
- (func $~lib/array/Array<i8>#get:buffer (param $this i32) (result i32)
+ (func $~lib/array/Array<u8>#get:buffer (param $this i32) (result i32)
   local.get $this
   i32.load
  )
- (func $~lib/array/Array<i8>~visit (param $0 i32) (param $1 i32)
+ (func $~lib/array/Array<u8>~visit (param $0 i32) (param $1 i32)
   local.get $0
   local.get $1
   call $~lib/object/Object~visit
   local.get $0
   local.get $1
-  call $~lib/array/Array<i8>#__visit
+  call $~lib/array/Array<u8>#__visit
  )
  (func $~lib/array/Array<i32>#get:buffer (param $this i32) (result i32)
   local.get $this
@@ -2595,7 +2595,7 @@
  (func $~lib/rt/__visit_members (param $0 i32) (param $1 i32)
   block $invalid
    block $~lib/array/Array<i32>
-    block $~lib/array/Array<i8>
+    block $~lib/array/Array<u8>
      block $~lib/typedarray/Uint8ClampedArray
       block $~lib/arraybuffer/ArrayBufferView
        block $~lib/string/String
@@ -2605,7 +2605,7 @@
           i32.const 8
           i32.sub
           i32.load
-          br_table $~lib/object/Object $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $~lib/typedarray/Uint8ClampedArray $~lib/array/Array<i8> $~lib/array/Array<i32> $invalid
+          br_table $~lib/object/Object $~lib/arraybuffer/ArrayBuffer $~lib/string/String $~lib/arraybuffer/ArrayBufferView $~lib/typedarray/Uint8ClampedArray $~lib/array/Array<u8> $~lib/array/Array<i32> $invalid
          end
          return
         end
@@ -2625,7 +2625,7 @@
     end
     local.get $0
     local.get $1
-    call $~lib/array/Array<i8>~visit
+    call $~lib/array/Array<u8>~visit
     return
    end
    local.get $0
@@ -2856,7 +2856,7 @@
   i32.add
   global.set $~lib/memory/__stack_pointer
  )
- (func $~lib/array/Array<i8>#__set (param $this i32) (param $index i32) (param $value i32)
+ (func $~lib/array/Array<u8>#__set (param $this i32) (param $index i32) (param $value i32)
   (local $3 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
@@ -2873,7 +2873,7 @@
   local.get $3
   i32.store
   local.get $3
-  call $~lib/array/Array<i8>#get:length_
+  call $~lib/array/Array<u8>#get:length_
   i32.ge_u
   if
    local.get $index
@@ -2903,7 +2903,7 @@
    local.get $index
    i32.const 1
    i32.add
-   call $~lib/array/Array<i8>#set:length_
+   call $~lib/array/Array<u8>#set:length_
   end
   local.get $this
   local.set $3
@@ -2911,7 +2911,7 @@
   local.get $3
   i32.store
   local.get $3
-  call $~lib/array/Array<i8>#get:dataStart
+  call $~lib/array/Array<u8>#get:dataStart
   local.get $index
   i32.const 0
   i32.shl
@@ -3035,7 +3035,8 @@
   i32.const 0
   block $~lib/math/NativeMath.floor|inlined.0 (result f64)
    local.get $r
-   i32.extend8_s
+   i32.const 255
+   i32.and
    local.get $amount
    i32.div_s
    f64.convert_i32_s
@@ -3044,13 +3045,14 @@
    f64.floor
    br $~lib/math/NativeMath.floor|inlined.0
   end
-  i32.trunc_sat_f64_s
-  call $~lib/array/Array<i8>#__set
+  i32.trunc_sat_f64_u
+  call $~lib/array/Array<u8>#__set
   local.get $7
   i32.const 1
   block $~lib/math/NativeMath.floor|inlined.1 (result f64)
    local.get $g
-   i32.extend8_s
+   i32.const 255
+   i32.and
    local.get $amount
    i32.div_s
    f64.convert_i32_s
@@ -3059,13 +3061,14 @@
    f64.floor
    br $~lib/math/NativeMath.floor|inlined.1
   end
-  i32.trunc_sat_f64_s
-  call $~lib/array/Array<i8>#__set
+  i32.trunc_sat_f64_u
+  call $~lib/array/Array<u8>#__set
   local.get $7
   i32.const 2
   block $~lib/math/NativeMath.floor|inlined.2 (result f64)
    local.get $b
-   i32.extend8_s
+   i32.const 255
+   i32.and
    local.get $amount
    i32.div_s
    f64.convert_i32_s
@@ -3074,8 +3077,8 @@
    f64.floor
    br $~lib/math/NativeMath.floor|inlined.2
   end
-  i32.trunc_sat_f64_s
-  call $~lib/array/Array<i8>#__set
+  i32.trunc_sat_f64_u
+  call $~lib/array/Array<u8>#__set
   local.get $7
   local.set $12
   global.get $~lib/memory/__stack_pointer
@@ -3085,7 +3088,7 @@
   local.get $12
   return
  )
- (func $~lib/array/Array<i8>#__visit (param $this i32) (param $cookie i32)
+ (func $~lib/array/Array<u8>#__visit (param $this i32) (param $cookie i32)
   (local $2 i32)
   global.get $~lib/memory/__stack_pointer
   i32.const 4
@@ -3103,7 +3106,7 @@
   local.get $2
   i32.store
   local.get $2
-  call $~lib/array/Array<i8>#get:buffer
+  call $~lib/array/Array<u8>#get:buffer
   local.get $cookie
   call $~lib/rt/itcms/__visit
   global.get $~lib/memory/__stack_pointer
