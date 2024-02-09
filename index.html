@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+<canvas></canvas>
 <script type="module">
   import {quantize} from "./build/release.js";
-  const input = prompt('Enter Image Url');
-  const canvas = document.createElement('canvas');
+  const canvas = document.querySelector('canvas');
   const context = canvas.getContext('2d');
   const canvasImg = new Image();
 
@@ -18,7 +18,7 @@
     alert(JSON.stringify(quantize(data)));
   }
   canvasImg.crossOrigin = '';
-  canvasImg.src = input;
+  canvasImg.src = './bigBuckBunny.webp';
 
 </script>
 
