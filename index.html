@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<canvas></canvas>
+<script type="module">
+  import quantize from "./build/release.js";
+
+  const canvas = document.html.firstElementChild;
+
+  const canvasImg = new Image();
+
+  canvasImg.onload = () => {
+    if (canvasImg.width === 120) return;
+    canvas.height = canvasImg.height;
+    canvas.width = canvasImg.width;
+    context.drawImage(canvasImg, 0, 0);
+
+    const data = context.getImageData(0, 0, canvasImg.width, canvasImg.height).data;
+
+    document.textContent = quantize(data);
+  }
+  canvasImg.crossOrigin = '';
+  canvasImg.src = prompt('Enter Image Url');
+
+</script>
+
+</html>
