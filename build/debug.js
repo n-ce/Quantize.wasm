@@ -18,9 +18,9 @@ async function instantiate(module, imports = {}) {
   const memory = exports.memory || imports.env.memory;
   const adaptedExports = Object.setPrototypeOf({
     quantize(array) {
-      // assembly/index/quantize(~lib/typedarray/Uint8ClampedArray) => ~lib/array/Array<f64>
+      // assembly/index/quantize(~lib/typedarray/Uint8ClampedArray) => ~lib/array/Array<i8>
       array = __lowerTypedArray(Uint8ClampedArray, 4, 0, array) || __notnull();
-      return __liftArray(__getF64, 3, exports.quantize(array) >>> 0);
+      return __liftArray(__getI8, 0, exports.quantize(array) >>> 0);
     },
   }, exports);
   function __liftString(pointer) {
@@ -68,20 +68,20 @@ async function instantiate(module, imports = {}) {
       __dataview.setUint32(pointer, value, true);
     }
   }
+  function __getI8(pointer) {
+    try {
+      return __dataview.getInt8(pointer, true);
+    } catch {
+      __dataview = new DataView(memory.buffer);
+      return __dataview.getInt8(pointer, true);
+    }
+  }
   function __getU32(pointer) {
     try {
       return __dataview.getUint32(pointer, true);
     } catch {
       __dataview = new DataView(memory.buffer);
       return __dataview.getUint32(pointer, true);
-    }
-  }
-  function __getF64(pointer) {
-    try {
-      return __dataview.getFloat64(pointer, true);
-    } catch {
-      __dataview = new DataView(memory.buffer);
-      return __dataview.getFloat64(pointer, true);
     }
   }
   return adaptedExports;
