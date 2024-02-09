@@ -2,7 +2,7 @@
 <html lang="en">
 <script type="module">
   import quantize from "./build/release.js";
-
+  const input = prompt('Enter Image Url');
   const canvas = document.createElement('canvas');
   const context = canvas.getContext('2d');
   const canvasImg = new Image();
@@ -15,10 +15,10 @@
 
     const data = context.getImageData(0, 0, canvasImg.width, canvasImg.height).data;
 
-    document.textContent = quantize(data);
+    alert(JSON.stringify(quantize(data)));
   }
   canvasImg.crossOrigin = '';
-  canvasImg.src = prompt('Enter Image Url');
+  canvasImg.src = input;
 
 </script>
 
