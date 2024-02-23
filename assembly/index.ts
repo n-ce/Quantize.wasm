@@ -16,8 +16,8 @@ export default function quantize(array: Uint8ClampedArray): u8[] {
   }
 
   return [
-    <u8>Math.floor(r / amount),
-    <u8>Math.floor(g / amount),
-    <u8>Math.floor(b / amount)
+    u8(Math.floor(r / amount)),
+    u8(Math.floor(g / amount)),
+    u8(Math.floor(b / amount))
   ];
 }
