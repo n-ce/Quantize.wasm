@@ -6,8 +6,8 @@ const canvasImg = new Image();
 
 canvasImg.onload = () => {
   if (canvasImg.width === 120) return;
-  canvas.height = canvasImg.height;
-  canvas.width = canvasImg.width;
+  canvas.height = 180;
+  canvas.width = 320;
   context.drawImage(canvasImg, 0, 0);
 
   const data = context.getImageData(0, 0, canvasImg.width, canvasImg.height).data;
@@ -16,4 +16,4 @@ canvasImg.onload = () => {
   document.body.appendChild(JSON.stringify(quantize(data)));
 }
 canvasImg.crossOrigin = '';
-canvasImg.src = './bigBuckBunny.webp';
+canvasImg.src = './web/bigBuckBunny.webp';
